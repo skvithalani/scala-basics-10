@@ -11,7 +11,7 @@ class A {
 
 A: A.type
 new A : A
-new A : A.type
+new A : A.ty
 
 val A1 = new AnyRef{}
 
