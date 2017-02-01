@@ -8,13 +8,13 @@ def add(o1: Option[String], o2: Option[String]): Option[String] = (o1, o2) match
 //add(None, None)
 
 def length[T](xs: List[T]): Int = xs match {
-  case Nil          => 0
-  case head :: tail => 1 + length(tail)
+  case Nil            => 0
+  case ::(head, tail) => 1 + length(tail)
 }
 
 def append[T](x: T, xs: List[T]): List[T] = xs match {
-  case Nil    => List(x)
-  case h :: t => h :: append(x, t)
+  case Nil      => List(x)
+  case ::(h, t) => ::(h, append(x, t))
 }
 
 append(10, List(1, 2))
