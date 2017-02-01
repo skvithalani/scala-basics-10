@@ -8,6 +8,7 @@ object Email {
   }
 }
 
+
 def parse(email: String) = email match {
   case Email(user, domain) => s"Hello $user from $domain"
   case _                   => "error"
