@@ -5,10 +5,13 @@ trait Ord[T] {
 }
 
 object Ord {
+  def apply[T](implicit ord: Ord[T]): Ord[T] = ord
 
   implicit val intOrd: Ord[Int] = (a: Int, b: Int) => a < b
 
-  implicit val strOrd: Ord[String] = (a: String, b: String) => a < b
+  implicit val strOrd: Ord[String] = new Ord[String] {
+    override def lt(a: String, b: String) = a < b
+  }
 
   implicit def optOrd[T](implicit ord: Ord[T]): Ord[Option[T]] = (a: Option[T], b: Option[T]) => (a, b) match {
     case (Some(x), Some(y)) => ord.lt(x, y)

@@ -1,6 +1,7 @@
 package data
 
 import example.typeclass.Ord
+import play.api.libs.json.{Json, Reads, Writes}
 
 
 case class Address(street: String, pin: Int)
@@ -24,6 +25,10 @@ case class Book(
 
 object Book {
   implicit val booOrd: Ord[Book] = (a: Book, b: Book) => a.basePrice > b.basePrice
+
+  implicit val readBook: Reads[Book] = Json.reads
+
+  implicit val writeBook: Writes[Book] = Json.writes[Book]
 }
 
 object Data {
