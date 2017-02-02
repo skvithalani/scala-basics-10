@@ -10,6 +10,7 @@ lazy val root = (project in file(".")).
     name := "Hello",
     libraryDependencies ++= Seq(
       `play-json`,
+      `scala-async`,
       scalaTest % Test
     )
   )

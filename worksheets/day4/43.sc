@@ -5,7 +5,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.control.NonFatal
 
-
 def square(x: Int): Future[Int] = Future {
   Thread.sleep(2000)
   println("running the square")
@@ -33,4 +32,5 @@ f1.flatMap { v1 =>
     v2 <- f2
   } yield v1 + v2
 }.show()
+
 
