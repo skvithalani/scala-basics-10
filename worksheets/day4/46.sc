@@ -11,7 +11,7 @@ def square(x: Int): Future[Int] = Future {
   x * x
 }
 
-val xs = List(1, 2, 3, 4)
+val xs = (1 to 4).toList
 
 val futures: List[Future[Int]] = xs.map(square)
 
@@ -23,3 +23,8 @@ futures
   .reduce((a, b) => async(await(a) + await(b)))
   .show()
 
+xs.foldLeft(Future.successful(List.empty[Int])) { (future, elm) =>
+  async {
+    await(square(elm)) :: await(future)
+  }
+}.map(_.reverse).show()
