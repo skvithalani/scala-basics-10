@@ -1,9 +1,8 @@
 import asynchrony.FutureExtensions.RichFuture
 
-import scala.collection.immutable.Seq
+import scala.async.Async._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-import scala.util.control.NonFatal
 
 def square(x: Int): Future[Int] = Future {
   Thread.sleep(2000)
@@ -33,4 +32,6 @@ f1.flatMap { v1 =>
   } yield v1 + v2
 }.show()
 
-
+async {
+  await(f1) + await(f2)
+}.show()
