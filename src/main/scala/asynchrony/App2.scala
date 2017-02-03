@@ -28,16 +28,18 @@ object App2 extends App {
   def map(f: Future[Int], op: Int => Int): Future[Int] = {
     val promise: Promise[Int] = Promise()
 
-    f.onComplete { (x: Try[Int]) =>
-      val result: Try[Int] = x.map(op)
-      promise.complete(result)
-    }
+//    f.onComplete { (x: Try[Int]) =>
+//      val result: Try[Int] = x.map(op)
+//      promise.complete(result)
+//    }
 
-    promise.future
+//    promise.future
 
-    async {
-      op(await(f))
+    val result : Future[Int] = async {
+      val x: Int = await(f)
+      op(x)
     }
+    result
   }
 
   println(map(f1, x => x * x).show())

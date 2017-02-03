@@ -33,7 +33,12 @@ object App1 extends App {
 
   println("call returns")
 
-  private val result = Await.result(f3, 10.seconds)
+  private val result = {
+                          println("In await")
+                          val result = Await.result(f3, 10.seconds)
+                          println("after await")
+                          result
+                        }
 
   println(result)
 }
